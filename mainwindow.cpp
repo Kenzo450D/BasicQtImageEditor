@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->setFixedSize(1130,650);
+    this->setFixedSize(1130,700);
 }
 
 MainWindow::~MainWindow()
@@ -57,6 +57,7 @@ void MainWindow::on_pushButton_3_released()     //"Save" Button
 
 void MainWindow::on_pushButton_4_released()     //"Brighter" Button
 {
+
     QColor c;
     int pixelData[3];
     //load Image Data (till previous filter)
@@ -99,6 +100,7 @@ void MainWindow::on_pushButton_4_released()     //"Brighter" Button
     ui->graphicsView->setScene(scene);
     ui->graphicsView->show();
     this->img = img;
+
 }
 
 void MainWindow::on_pushButton_5_released()     //"Darker" Button
@@ -343,7 +345,7 @@ void MainWindow::on_pushButton_15_released()    //"Negative" Button
     QString filePathName = this->fileName;
     QImage img = this->img;
 
-    //Make Image brighter
+    //Make Image negative
 
     for (int y = 0 ; y < img.height(); y++)
     {
@@ -358,6 +360,104 @@ void MainWindow::on_pushButton_15_released()    //"Negative" Button
             {
                 pixelData[i] = 255 - pixelData[i];
             }
+            c.setRed(pixelData[0]);
+            c.setGreen(pixelData[1]);
+            c.setBlue(pixelData[2]);
+            if (img.hasAlphaChannel())
+            {
+                img.setPixel(x,y,c.rgba());
+            }
+            else
+            {
+                img.setPixel(x,y,c.rgb());
+            }
+        }
+    }
+    this->scene = new QGraphicsScene;
+    this->item.setPixmap(QPixmap::fromImage(img));
+    this->scene->addItem(&(this->item));
+    ui->graphicsView->setScene(scene);
+    ui->graphicsView->show();
+    this->img = img;
+}
+
+void MainWindow::on_pushButton_16_released() // "Grayscale" button
+{
+    QColor c;
+    int pixelData[3];
+    //load Image Data (till previous filter)
+    QString filePathName = this->fileName;
+    QImage img = this->img;
+
+
+
+    for (int y = 0 ; y < img.height(); y++)
+    {
+        for (int x = 0 ; x < img.width(); x++)
+        {
+            c = QColor::fromRgba(img.pixel(x,y));
+            pixelData[0] = c.red();
+            pixelData[1] = c.green();
+            pixelData[2] = c.blue();
+
+            int grayPixel = (pixelData[0] + pixelData[1] +pixelData[2]) / 3;
+
+            for (int i = 0 ; i < 3 ; i ++ )
+            {
+                pixelData[i] = grayPixel;
+            }
+            c.setRed(pixelData[0]);
+            c.setGreen(pixelData[1]);
+            c.setBlue(pixelData[2]);
+            if (img.hasAlphaChannel())
+            {
+                img.setPixel(x,y,c.rgba());
+            }
+            else
+            {
+                img.setPixel(x,y,c.rgb());
+            }
+        }
+    }
+    this->scene = new QGraphicsScene;
+    this->item.setPixmap(QPixmap::fromImage(img));
+    this->scene->addItem(&(this->item));
+    ui->graphicsView->setScene(scene);
+    ui->graphicsView->show();
+    this->img = img;
+}
+
+void MainWindow::on_pushButton_17_released() // "Black and White" button
+{
+    QColor c;
+    int pixelData[3];
+    //load Image Data (till previous filter)
+    QString filePathName = this->fileName;
+    QImage img = this->img;
+
+
+
+    for (int y = 0 ; y < img.height(); y++)
+    {
+        for (int x = 0 ; x < img.width(); x++)
+        {
+            c = QColor::fromRgba(img.pixel(x,y));
+            pixelData[0] = c.red();
+            pixelData[1] = c.green();
+            pixelData[2] = c.blue();
+
+            int grayPixel = (pixelData[0] + pixelData[1] +pixelData[2]) / 3;
+
+            if(grayPixel < 128)
+                grayPixel = 0;
+            else
+                grayPixel = 255;
+
+            for (int i = 0 ; i < 3 ; i ++ )
+            {
+                pixelData[i] = grayPixel;
+            }
+
             c.setRed(pixelData[0]);
             c.setGreen(pixelData[1]);
             c.setBlue(pixelData[2]);

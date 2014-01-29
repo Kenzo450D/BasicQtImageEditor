@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1130</width>
-    <height>650</height>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -72,19 +72,19 @@
       <x>1000</x>
       <y>400</y>
       <width>120</width>
-      <height>191</height>
+      <height>281</height>
      </rect>
     </property>
     <property name="title">
      <string>Color</string>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>20</y>
-       <width>100</width>
-       <height>161</height>
+       <width>104</width>
+       <height>260</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -130,6 +130,20 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_16">
+        <property name="text">
+         <string>Grayscale</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_17">
+        <property name="text">
+         <string>Black White</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </widget>
@@ -145,13 +159,13 @@
     <property name="title">
      <string>Image</string>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>40</y>
        <width>105</width>
-       <height>166</height>
+       <height>194</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -206,7 +220,7 @@
       <x>10</x>
       <y>10</y>
       <width>981</width>
-      <height>631</height>
+      <height>681</height>
      </rect>
     </property>
    </widget>
